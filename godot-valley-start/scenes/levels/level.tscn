@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=24 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Script" uid="uid://8e4xx2ujtvll" path="res://scenes/levels/level.gd" id="1_d4w6o"]
 [ext_resource type="PackedScene" uid="uid://b0mnopqlx5dix" path="res://scenes/characters/player.tscn" id="2_b2cq8"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cpjr8yl2yentc" path="res://graphics/tilesets/soil.png" id="3_urvlt"]
 [ext_resource type="Texture2D" uid="uid://7hb3udgvd13q" path="res://graphics/tilesets/hills.png" id="4_d4w6o"]
 [ext_resource type="Texture2D" uid="uid://vrdy2gp08qay" path="res://graphics/tilesets/soil_water.png" id="7_mbbpy"]
+[ext_resource type="Texture2D" uid="uid://cwbhys0nypuq" path="res://graphics/tilesets/roof.png" id="8_ouxo3"]
+[ext_resource type="PackedScene" uid="uid://d2530w2lrixv4" path="res://scenes/objects/tree.tscn" id="9_icy5c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d4w6o"]
 texture = ExtResource("2_urvlt")
@@ -1079,17 +1081,34 @@ texture = ExtResource("7_mbbpy")
 [sub_resource type="TileSet" id="TileSet_rmjfq"]
 sources/0 = SubResource("TileSetAtlasSource_icy5c")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xfk5q"]
+texture = ExtResource("8_ouxo3")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_qogh7"]
+sources/1 = SubResource("TileSetAtlasSource_xfk5q")
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_d4w6o")
 
 [node name="Layers" type="Node2D" parent="."]
-
-[node name="Objects" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="Player" parent="Objects" instance=ExtResource("2_b2cq8")]
-z_index = 4
-position = Vector2(186, 342)
 
 [node name="Tilemap Layers" type="Node" parent="."]
 
@@ -1111,5 +1130,19 @@ tile_set = SubResource("TileSet_urvlt")
 
 [node name="Water Patches" type="TileMapLayer" parent="Tilemap Layers"]
 tile_set = SubResource("TileSet_rmjfq")
+
+[node name="Debug" type="TileMapLayer" parent="Tilemap Layers"]
+visible = false
+z_index = 5
+tile_set = SubResource("TileSet_qogh7")
+
+[node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Objects" instance=ExtResource("2_b2cq8")]
+position = Vector2(186, 342)
+
+[node name="Tree" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(239, 310)
 
 [connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]

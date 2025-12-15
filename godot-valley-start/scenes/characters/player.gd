@@ -3,9 +3,10 @@ extends CharacterBody2D
 var direction: Vector2 
 var last_direction: Vector2 = Vector2(0,1)
 var speed:= 50
-var current_tool: Enum.Tool = Enum.Tool.HOE
+var current_tool: Enum.Tool = Enum.Tool.AXE
 var current_seed: Enum.Seed
 var can_move = true
+var tool_use_offset: Vector2
 
 @onready var move_state_machine: AnimationNodeStateMachinePlayback = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var tool_state_machine: AnimationNodeStateMachinePlayback = $Animation/AnimationTree.get("parameters/ToolStateMachine/playback")
@@ -76,7 +77,7 @@ func update_animation(parameter, value):
 #endregion
 
 func tool_use_emit():
-	var tool_use_offset = Vector2(0, 4)
+	tool_use_offset = Vector2(0, 4)
 	var tool_use_position = position + last_direction * Data.TILE_SIZE + tool_use_offset
 	tool_use.emit(current_tool, tool_use_position)
 		
