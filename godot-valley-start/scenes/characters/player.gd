@@ -41,7 +41,6 @@ func handle_seed_selection():
 		
 func handle_interactions():
 	if Input.is_action_just_pressed("action"):
-		print(current_tool)
 		tool_state_machine.travel(Data.TOOL_STATE_ANIMATIONS.get(current_tool))
 		update_animation("parameters/ToolOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 #endregion

@@ -1471,6 +1471,7 @@ transitions = ["Axe", "Hoe", SubResource("AnimationNodeStateMachineTransition_n7
 graph_offset = Vector2(-273, -85)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_inhyd"]
+graph_offset = Vector2(-341.6, -86.19998)
 nodes/output/position = Vector2(800, -60)
 nodes/ToolStateMachine/node = SubResource("AnimationNodeStateMachine_w5sjy")
 nodes/ToolStateMachine/position = Vector2(140, 140)
@@ -1490,7 +1491,7 @@ script = ExtResource("2_76oj4")
 texture = ExtResource("3_6eyoc")
 hframes = 33
 vframes = 4
-frame = 6
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_atpat")
