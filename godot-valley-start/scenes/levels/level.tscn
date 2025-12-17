@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=24 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Script" uid="uid://8e4xx2ujtvll" path="res://scenes/levels/level.gd" id="1_d4w6o"]
 [ext_resource type="PackedScene" uid="uid://b0mnopqlx5dix" path="res://scenes/characters/player.tscn" id="2_b2cq8"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://vrdy2gp08qay" path="res://graphics/tilesets/soil_water.png" id="7_mbbpy"]
 [ext_resource type="Texture2D" uid="uid://cwbhys0nypuq" path="res://graphics/tilesets/roof.png" id="8_ouxo3"]
 [ext_resource type="PackedScene" uid="uid://d2530w2lrixv4" path="res://scenes/objects/tree.tscn" id="9_icy5c"]
-[ext_resource type="PackedScene" uid="uid://d158imc22rl57" path="res://scenes/characters/blob.tscn" id="10_rmjfq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d4w6o"]
 texture = ExtResource("2_urvlt")
@@ -1145,8 +1144,5 @@ position = Vector2(186, 342)
 
 [node name="Tree" parent="Objects" instance=ExtResource("9_icy5c")]
 position = Vector2(239, 310)
-
-[node name="Blob" parent="Objects" instance=ExtResource("10_rmjfq")]
-position = Vector2(159, 235)
 
 [connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]
