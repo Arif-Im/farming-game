@@ -7,14 +7,36 @@ extends Node2D
 @onready var objects: Node2D = $Objects
 @onready var player: CharacterBody2D = $Objects/Player
 @onready var debug: TileMapLayer = $"Tilemap Layers/Debug"
+@onready var day_timer: Timer = $Timers/DayTimer
+@onready var day_time_color: CanvasModulate = $Overlay/DayTimeColor
+@onready var day_transition_layer: ColorRect = $Overlay/CanvasLayer/DayTransitionLayer
+
+@export var daytime_color: Gradient
 
 var used_cells: Array[Vector2i]
 var has_soil: bool = false
 var grid_coord: Vector2i
 
-func _physics_process(_delta: float) -> void:
-	pass
-	
+signal day_end()
+
+func _process(_delta: float) -> void:
+	var daytime_point = 1 - (day_timer.time_left / day_timer.wait_time)
+	var color = daytime_color.sample(daytime_point)
+	day_time_color.color = color
+	if Input.is_action_just_pressed("day_change"):
+		day_restart()
+
+func day_restart():
+	var tween = create_tween()
+	tween.tween_property(day_transition_layer.material, "shader_parameter/progress", 1.0, 1.0)
+	tween.tween_interval(0.5)
+	tween.tween_callback(level_reset)
+	tween.tween_property(day_transition_layer.material, "shader_parameter/progress", 0.0, 1.0)
+
+func level_reset():
+	day_end.emit()
+	day_timer.start()
+
 #region Debugging
 func debug_tile():
 	var player_position = player.position + player.last_direction * Data.TILE_SIZE + Vector2(0,4)

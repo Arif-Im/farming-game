@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=25 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Script" uid="uid://8e4xx2ujtvll" path="res://scenes/levels/level.gd" id="1_d4w6o"]
 [ext_resource type="PackedScene" uid="uid://b0mnopqlx5dix" path="res://scenes/characters/player.tscn" id="2_b2cq8"]
@@ -10,11 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://cwbhys0nypuq" path="res://graphics/tilesets/roof.png" id="8_ouxo3"]
 [ext_resource type="PackedScene" uid="uid://d2530w2lrixv4" path="res://scenes/objects/tree.tscn" id="9_icy5c"]
 [ext_resource type="PackedScene" uid="uid://vem02mh7silc" path="res://scenes/objects/simple_object.tscn" id="10_rmjfq"]
-[ext_resource type="Shader" uid="uid://b752sedpoqe4y" path="res://shaders/circle_transition.gdshader" id="11_7pb6i"]
-
-[sub_resource type="Gradient" id="Gradient_rmjfq"]
-offsets = PackedFloat32Array(0, 0.308204, 0.42793792, 0.9933481)
-colors = PackedColorArray(0.92941177, 0.8627451, 0.8156863, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.36862746, 0.46666667, 1, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d4w6o"]
 texture = ExtResource("2_urvlt")
@@ -1111,13 +1106,8 @@ texture = ExtResource("8_ouxo3")
 [sub_resource type="TileSet" id="TileSet_qogh7"]
 sources/1 = SubResource("TileSetAtlasSource_xfk5q")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfk5q"]
-shader = ExtResource("11_7pb6i")
-shader_parameter/progress = 0.0
-
 [node name="Level" type="Node2D"]
 script = ExtResource("1_d4w6o")
-daytime_color = SubResource("Gradient_rmjfq")
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -1157,7 +1147,6 @@ position = Vector2(186, 342)
 position = Vector2(239, 310)
 
 [node name="SimpleObject" parent="Objects" instance=ExtResource("10_rmjfq")]
-z_index = 1
 position = Vector2(161, 368)
 
 [node name="SimpleObject3" parent="Objects" instance=ExtResource("10_rmjfq")]
@@ -1182,45 +1171,18 @@ position = Vector2(101, 388)
 size = 2
 
 [node name="SimpleObject7" parent="Objects" instance=ExtResource("10_rmjfq")]
-z_index = 1
 position = Vector2(140, 368)
 size = 1
 random = true
 
 [node name="SimpleObject8" parent="Objects" instance=ExtResource("10_rmjfq")]
-z_index = 1
 position = Vector2(161, 348)
 size = 1
 style = 1
 random = true
 
 [node name="SimpleObject9" parent="Objects" instance=ExtResource("10_rmjfq")]
-z_index = 1
 position = Vector2(143, 383)
 style = 1
 
-[node name="Overlay" type="Node2D" parent="."]
-
-[node name="DayTimeColor" type="CanvasModulate" parent="Overlay"]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Overlay"]
-
-[node name="DayTransitionLayer" type="ColorRect" parent="Overlay/CanvasLayer"]
-material = SubResource("ShaderMaterial_xfk5q")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.030401122, 0.09135371, 0.20292097, 1)
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="DayTimer" type="Timer" parent="Timers"]
-wait_time = 5.0
-one_shot = true
-autostart = true
-
-[connection signal="day_end" from="." to="." method="_on_day_end"]
-[connection signal="day_end" from="." to="Objects/Tree" method="_on_level_day_end"]
 [connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]

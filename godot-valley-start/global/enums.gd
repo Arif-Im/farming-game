@@ -7,3 +7,4 @@ enum Machine {SPRINKLER, FISHER, SCARECROW, DELETE}
 enum Seed {TOMATO, CORN, PUMPKIN, WHEAT}
 enum Item {WOOD, APPLE, TOMATO, CORN, WHEAT, PUMPKIN, FISH}
 enum Shop {MAIN, HAT}
+enum Selection {TOOL, SEED}
