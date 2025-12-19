@@ -1,0 +1,30 @@
+class_name PlantResource extends Resource
+
+@export var texture: Texture2D
+@export var grow_speed: float = 1
+@export var max_life = 3
+@export var h_frames: int = 3
+
+var age: float
+var life: float
+
+func setup(seed: Enum.Seed):
+	var statement = "seed: %s" % [seed]
+	print(statement)
+	
+	texture = load(Data.PLANT_DATA[seed]['texture'])
+	grow_speed = Data.PLANT_DATA[seed]['grow_speed']
+	h_frames = Data.PLANT_DATA[seed]['h_frames']
+	max_life = Data.PLANT_DATA[seed]['death_max']
+	life = max_life
+
+func grow(sprite: Sprite2D):
+	life = max_life
+	age = min(age + grow_speed, sprite.hframes - 1)
+	sprite.frame = int(age)
+
+func wither():
+	if life > 0:
+		life -= 1
+		var format = "Life %s" % [life]
+		print(format)

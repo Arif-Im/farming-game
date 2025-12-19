@@ -60,14 +60,9 @@ func _on_player_tool_use(tool: int, pos: Vector2) -> void:
 		Enum.Tool.FISH:
 			handle_fish()
 		Enum.Tool.SEED:
-			handle_water()
+			handle_seed()
 		Enum.Tool.AXE, Enum.Tool.SWORD:
 			handle_damaging_tools(pos, tool)
-			
-func handle_damaging_tools(pos: Vector2, tool: Enum.Tool):
-	for object in get_tree().get_nodes_in_group('Objects'):
-		if object.position.distance_to(pos) < 20:
-			object.hit(tool)
 
 func set_grid_coord(pos: Vector2):
 	var x = int(pos.x / Data.TILE_SIZE)
@@ -77,10 +72,17 @@ func set_grid_coord(pos: Vector2):
 	grid_coord.y += -1 if pos.y < 0 else 0
 
 #region Actions
+func handle_damaging_tools(pos: Vector2, tool: Enum.Tool):
+	for object in get_tree().get_nodes_in_group('Objects'):
+		if object.position.distance_to(pos) < 20:
+			object.hit(tool)
+			
 func handle_seed():
 	if has_soil and grid_coord not in used_cells:
+		var plant_res = PlantResource.new()
+		plant_res.setup(player.current_seed)
 		var plant = plant_scene.instantiate()
-		plant.setup(grid_coord, objects)
+		plant.setup(grid_coord, objects, plant_res)
 		used_cells.append(grid_coord)
 	
 func handle_fish():
@@ -107,3 +109,12 @@ func handle_water():
 		var random = randi_range(0, 2)
 		water_patches.set_cell(grid_coord, 0, Vector2(random, 0))
 #endregion
+
+func _on_day_end() -> void:
+	for plant in get_tree().get_nodes_in_group('Plants'):
+		var in_water_patches = plant.coord in water_patches.get_used_cells()
+		plant.grow(in_water_patches)
+		if not plant.is_alive():
+			used_cells.erase(plant.coord)
+			plant.queue_free()
+	water_patches.clear()

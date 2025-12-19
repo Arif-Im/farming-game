@@ -1157,10 +1157,10 @@ position = Vector2(186, 342)
 position = Vector2(239, 310)
 
 [node name="SimpleObject" parent="Objects" instance=ExtResource("10_rmjfq")]
-z_index = 1
 position = Vector2(161, 368)
 
 [node name="SimpleObject3" parent="Objects" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(286, 257)
 size = 3
 style = 1
@@ -1178,24 +1178,23 @@ size = 2
 random = true
 
 [node name="SimpleObject6" parent="Objects" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(101, 388)
 size = 2
 
 [node name="SimpleObject7" parent="Objects" instance=ExtResource("10_rmjfq")]
-z_index = 1
 position = Vector2(140, 368)
 size = 1
 random = true
 
 [node name="SimpleObject8" parent="Objects" instance=ExtResource("10_rmjfq")]
-z_index = 1
+z_index = 4
 position = Vector2(161, 348)
 size = 1
 style = 1
 random = true
 
 [node name="SimpleObject9" parent="Objects" instance=ExtResource("10_rmjfq")]
-z_index = 1
 position = Vector2(143, 383)
 style = 1
 

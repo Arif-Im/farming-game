@@ -7,7 +7,7 @@
 size = Vector2(10, 4)
 
 [node name="SimpleObject" type="StaticBody2D"]
-z_index = 4
+z_index = 1
 y_sort_enabled = true
 collision_mask = 0
 script = ExtResource("1_n4sul")
@@ -19,3 +19,4 @@ vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jad2w")
+disabled = true
