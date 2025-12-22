@@ -1494,7 +1494,7 @@ hframes = 33
 vframes = 4
 frame = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
 shape = SubResource("CapsuleShape2D_atpat")
 
 [node name="Animation" type="Node" parent="."]

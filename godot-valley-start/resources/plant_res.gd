@@ -7,12 +7,18 @@ class_name PlantResource extends Resource
 
 var age: float
 var life: float
+var plant_name: String
+var dead: bool:
+	set(value):
+		dead = value
+		emit_changed()
 
 func setup(seed: Enum.Seed):
 	var statement = "seed: %s" % [seed]
 	print(statement)
 	
 	texture = load(Data.PLANT_DATA[seed]['texture'])
+	plant_name = Data.PLANT_DATA[seed]['name']
 	grow_speed = Data.PLANT_DATA[seed]['grow_speed']
 	h_frames = Data.PLANT_DATA[seed]['h_frames']
 	max_life = Data.PLANT_DATA[seed]['death_max']
@@ -28,3 +34,6 @@ func wither():
 		life -= 1
 		var format = "Life %s" % [life]
 		print(format)
+		
+func is_complete():
+	return age >= h_frames

@@ -13,6 +13,7 @@ var tool_use_offset: Vector2
 @onready var tool_ui: Control = $ToolUI
 
 signal tool_use(tool: Enum.Tool, pos: Vector2)
+signal diagnose()
 
 func _physics_process(_delta: float) -> void:
 	if can_move:
@@ -28,6 +29,11 @@ func get_basic_input():
 	handle_tool_selection()
 	handle_seed_selection()
 	handle_interactions()
+	handle_diagnose() 
+	
+func handle_diagnose():
+	if Input.is_action_just_pressed("diagnose"):
+		diagnose.emit()
 
 func handle_tool_selection():
 	var tool_forward_pressed: bool = Input.is_action_just_pressed("tool_forward")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=29 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Script" uid="uid://8e4xx2ujtvll" path="res://scenes/levels/level.gd" id="1_d4w6o"]
 [ext_resource type="PackedScene" uid="uid://b0mnopqlx5dix" path="res://scenes/characters/player.tscn" id="2_b2cq8"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d2530w2lrixv4" path="res://scenes/objects/tree.tscn" id="9_icy5c"]
 [ext_resource type="PackedScene" uid="uid://vem02mh7silc" path="res://scenes/objects/simple_object.tscn" id="10_rmjfq"]
 [ext_resource type="Shader" uid="uid://b752sedpoqe4y" path="res://shaders/circle_transition.gdshader" id="11_7pb6i"]
+[ext_resource type="PackedScene" uid="uid://d2jfcasv86i1m" path="res://scenes/ui/plant_info_container.tscn" id="12_xfk5q"]
 
 [sub_resource type="Gradient" id="Gradient_rmjfq"]
 offsets = PackedFloat32Array(0, 0.308204, 0.42793792, 0.9933481)
@@ -1167,6 +1168,7 @@ style = 1
 random = true
 
 [node name="SimpleObject4" parent="Objects" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(118, 258)
 size = 3
 style = 1
@@ -1183,6 +1185,7 @@ position = Vector2(101, 388)
 size = 2
 
 [node name="SimpleObject7" parent="Objects" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(140, 368)
 size = 1
 random = true
@@ -1213,6 +1216,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.030401122, 0.09135371, 0.20292097, 1)
 
+[node name="PlantInfoContainer" parent="Overlay/CanvasLayer" instance=ExtResource("12_xfk5q")]
+
 [node name="Timers" type="Node" parent="."]
 
 [node name="DayTimer" type="Timer" parent="Timers"]
@@ -1222,4 +1227,5 @@ autostart = true
 
 [connection signal="day_end" from="." to="." method="_on_day_end"]
 [connection signal="day_end" from="." to="Objects/Tree" method="_on_level_day_end"]
+[connection signal="diagnose" from="Objects/Player" to="." method="_on_player_diagnose"]
 [connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]

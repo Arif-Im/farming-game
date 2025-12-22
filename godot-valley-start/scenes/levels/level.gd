@@ -10,6 +10,7 @@ extends Node2D
 @onready var day_timer: Timer = $Timers/DayTimer
 @onready var day_time_color: CanvasModulate = $Overlay/DayTimeColor
 @onready var day_transition_layer: ColorRect = $Overlay/CanvasLayer/DayTransitionLayer
+@onready var plant_info_container: Control = $Overlay/CanvasLayer/PlantInfoContainer
 
 @export var daytime_color: Gradient
 
@@ -64,6 +65,9 @@ func _on_player_tool_use(tool: int, pos: Vector2) -> void:
 		Enum.Tool.AXE, Enum.Tool.SWORD:
 			handle_damaging_tools(pos, tool)
 
+func _on_player_diagnose() -> void:
+	plant_info_container.visible = not plant_info_container.visible
+
 func set_grid_coord(pos: Vector2):
 	var x = int(pos.x / Data.TILE_SIZE)
 	var y = int(pos.y / Data.TILE_SIZE)
@@ -82,8 +86,10 @@ func handle_seed():
 		var plant_res = PlantResource.new()
 		plant_res.setup(player.current_seed)
 		var plant = plant_scene.instantiate()
-		plant.setup(grid_coord, objects, plant_res)
+		plant.setup(grid_coord, objects, plant_res, plant_death)
+		plant_info_container.add(plant_res)
 		used_cells.append(grid_coord)
+		print("Used cells: %s" % [used_cells])
 	
 func handle_fish():
 	var water_cell = water.get_cell_tile_data(grid_coord) as TileData
@@ -114,7 +120,12 @@ func _on_day_end() -> void:
 	for plant in get_tree().get_nodes_in_group('Plants'):
 		var in_water_patches = plant.coord in water_patches.get_used_cells()
 		plant.grow(in_water_patches)
+		plant_info_container.update(plant.res)
 		if not plant.is_alive():
 			used_cells.erase(plant.coord)
 			plant.queue_free()
 	water_patches.clear()
+	
+func plant_death(coord: Vector2i):
+	used_cells.erase(coord)
+	print("Used cells: %s" % [used_cells])

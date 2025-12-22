@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmruhfnt8kgi1"]
+
+[ext_resource type="Texture2D" uid="uid://dlh3xrk6a5cu" path="res://graphics/icons/tomato.png" id="1_78rg4"]
+[ext_resource type="Script" uid="uid://c35ols0lbod4b" path="res://scenes/ui/plant_info.gd" id="2_kscek"]
+[ext_resource type="Texture2D" uid="uid://k4r0km103lsj" path="res://graphics/ui/v_bar.png" id="2_lyi38"]
+[ext_resource type="Theme" uid="uid://rhcgh2v8xs3h" path="res://scenes/ui/game_theme.tres" id="3_uxb0r"]
+
+[node name="PlantInfo" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("3_uxb0r")
+script = ExtResource("2_kscek")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="IconTexture" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("1_78rg4")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tomato"
+
+[node name="GrowthBar" type="TextureProgressBar" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+value = 1.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_lyi38")
+texture_progress = ExtResource("2_lyi38")
+tint_under = Color(0.09019608, 0.09019608, 0.09019608, 1)
+tint_progress = Color(0.5052488, 0.7367072, 0.41500735, 1)
+
+[node name="DeathBar" type="TextureProgressBar" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+theme = ExtResource("3_uxb0r")
+value = 12.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_lyi38")
+texture_progress = ExtResource("2_lyi38")
+tint_under = Color(0.09019608, 0.09019608, 0.09019608, 1)
+tint_progress = Color(0.68101156, 0.2853997, 0.40589523, 1)
