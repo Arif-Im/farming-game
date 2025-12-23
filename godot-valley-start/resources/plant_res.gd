@@ -1,5 +1,6 @@
 class_name PlantResource extends Resource
 
+@export var icon_texture: Texture2D
 @export var texture: Texture2D
 @export var grow_speed: float = 1
 @export var max_life = 3
@@ -17,6 +18,7 @@ func setup(seed: Enum.Seed):
 	var statement = "seed: %s" % [seed]
 	print(statement)
 	
+	icon_texture = load(Data.PLANT_DATA[seed]['icon_texture'])
 	texture = load(Data.PLANT_DATA[seed]['texture'])
 	plant_name = Data.PLANT_DATA[seed]['name']
 	grow_speed = Data.PLANT_DATA[seed]['grow_speed']

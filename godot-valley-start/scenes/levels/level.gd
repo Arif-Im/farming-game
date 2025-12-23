@@ -130,10 +130,7 @@ func update_plant(plant: StaticBody2D):
 	
 func remove_plant(plant: StaticBody2D):
 	used_cells.erase(plant.coord)
-	plant_info_container.remove(plant.res)
-	plant.queue_free()
 	
-func plant_death(res: PlantResource, coord: Vector2i):
-	plant_info_container.remove(res)
+func plant_death(coord: Vector2i):
 	used_cells.erase(coord)
 	print("Used cells: %s" % [used_cells])

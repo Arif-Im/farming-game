@@ -19,6 +19,10 @@ func grow(watered: bool):
 		res.grow($FlashSprite2D)
 	else:
 		res.wither()
+		if not is_alive():
+			handle_death()
+			queue_free()
+			
 		
 func is_alive():
 	return res.life > 0
@@ -26,5 +30,8 @@ func is_alive():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if res.is_complete():
 		$FlashSprite2D.flash(.2, .4, queue_free)
-		death.emit(res, coord)
-		res.dead = true
+		handle_death()
+		
+func handle_death():
+	death.emit(coord)
+	res.dead = true

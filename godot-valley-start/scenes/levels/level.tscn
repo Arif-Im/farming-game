@@ -1185,7 +1185,6 @@ position = Vector2(101, 388)
 size = 2
 
 [node name="SimpleObject7" parent="Objects" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(140, 368)
 size = 1
 random = true
@@ -1200,6 +1199,187 @@ random = true
 [node name="SimpleObject9" parent="Objects" instance=ExtResource("10_rmjfq")]
 position = Vector2(143, 383)
 style = 1
+
+[node name="Tree2" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(316, 116)
+
+[node name="Tree3" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(386, 130)
+
+[node name="Tree4" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(360, 54)
+
+[node name="Tree5" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(284, 60)
+
+[node name="Tree6" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(-29, 149)
+
+[node name="Tree7" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(-105, 167)
+
+[node name="Tree8" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(-162, 225)
+
+[node name="Tree9" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(-93, 249)
+
+[node name="Tree10" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(462, 437)
+
+[node name="Tree11" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(445, 326)
+
+[node name="Tree12" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(531, 470)
+
+[node name="Tree13" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(469, 380)
+
+[node name="Tree14" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(225, 155)
+
+[node name="Tree15" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(-137, 302)
+
+[node name="Tree16" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(195, 517)
+
+[node name="Tree17" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(233, 568)
+
+[node name="Tree18" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(283, 588)
+
+[node name="Tree19" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(296, 518)
+
+[node name="Tree20" parent="Objects" instance=ExtResource("9_icy5c")]
+position = Vector2(-109, 374)
+
+[node name="SimpleObject10" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(262, 401)
+style = 1
+random = true
+
+[node name="SimpleObject11" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(67, 469)
+style = 1
+random = true
+
+[node name="SimpleObject12" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(41, 484)
+style = 1
+random = true
+
+[node name="SimpleObject13" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(-52, 440)
+style = 1
+random = true
+
+[node name="SimpleObject14" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(-53, 343)
+style = 1
+random = true
+
+[node name="SimpleObject15" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(-77, 310)
+style = 1
+random = true
+
+[node name="SimpleObject16" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(-22, 306)
+style = 1
+random = true
+
+[node name="SimpleObject17" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(-40, 383)
+style = 1
+random = true
+
+[node name="SimpleObject18" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(-164, 348)
+style = 1
+random = true
+
+[node name="SimpleObject19" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(138, 201)
+style = 1
+random = true
+
+[node name="SimpleObject20" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(278, 202)
+style = 1
+random = true
+
+[node name="SimpleObject21" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(189, 220)
+style = 1
+random = true
+
+[node name="SimpleObject22" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(187, 178)
+style = 1
+random = true
+
+[node name="SimpleObject23" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(57, 184)
+style = 1
+random = true
+
+[node name="SimpleObject24" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(97, 210)
+style = 1
+random = true
+
+[node name="SimpleObject25" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(217, 93)
+style = 1
+random = true
+
+[node name="SimpleObject26" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(350, 487)
+style = 1
+random = true
+
+[node name="SimpleObject27" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(417, 504)
+style = 1
+random = true
+
+[node name="SimpleObject28" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(372, 311)
+style = 1
+random = true
+
+[node name="SimpleObject29" parent="Objects" instance=ExtResource("10_rmjfq")]
+position = Vector2(412, 267)
+style = 1
+random = true
+
+[node name="SimpleObject30" parent="Objects" instance=ExtResource("10_rmjfq")]
+z_index = 4
+position = Vector2(35, 97)
+style = 1
+random = true
+
+[node name="SimpleObject31" parent="Objects" instance=ExtResource("10_rmjfq")]
+z_index = 4
+position = Vector2(76, 58)
+style = 1
+random = true
+
+[node name="SimpleObject32" parent="Objects" instance=ExtResource("10_rmjfq")]
+z_index = 4
+position = Vector2(243, 524)
+style = 1
+random = true
+
+[node name="SimpleObject33" parent="Objects" instance=ExtResource("10_rmjfq")]
+z_index = 4
+position = Vector2(199, 483)
+style = 1
+random = true
 
 [node name="Overlay" type="Node2D" parent="."]
 

@@ -29,6 +29,7 @@ var health := 3:
 			
 
 func _ready() -> void:
+	$FlashSprite2D.frame = [0,1].pick_random()
 	create_apples(3)
 
 func hit(tool: Enum.Tool):

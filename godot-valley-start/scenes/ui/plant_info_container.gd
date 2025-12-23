@@ -15,8 +15,3 @@ func add(res: PlantResource):
 func update():
 	for plant in v_box_container.get_children():
 		plant.update()
-		
-func remove(res: PlantResource):
-	var plant = plants[res]
-	plants.erase(res)
-	plant.queue_free()
