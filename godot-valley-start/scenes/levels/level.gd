@@ -118,14 +118,22 @@ func handle_water():
 
 func _on_day_end() -> void:
 	for plant in get_tree().get_nodes_in_group('Plants'):
-		var in_water_patches = plant.coord in water_patches.get_used_cells()
-		plant.grow(in_water_patches)
-		plant_info_container.update(plant.res)
+		update_plant(plant)
 		if not plant.is_alive():
-			used_cells.erase(plant.coord)
-			plant.queue_free()
+			remove_plant(plant)
 	water_patches.clear()
 	
-func plant_death(coord: Vector2i):
+func update_plant(plant: StaticBody2D):
+	var in_water_patches = plant.coord in water_patches.get_used_cells()
+	plant.grow(in_water_patches)
+	plant_info_container.update()
+	
+func remove_plant(plant: StaticBody2D):
+	used_cells.erase(plant.coord)
+	plant_info_container.remove(plant.res)
+	plant.queue_free()
+	
+func plant_death(res: PlantResource, coord: Vector2i):
+	plant_info_container.remove(res)
 	used_cells.erase(coord)
 	print("Used cells: %s" % [used_cells])

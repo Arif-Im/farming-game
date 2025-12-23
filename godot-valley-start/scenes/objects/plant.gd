@@ -26,5 +26,5 @@ func is_alive():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if res.is_complete():
 		$FlashSprite2D.flash(.2, .4, queue_free)
-		death.emit(coord)
+		death.emit(res, coord)
 		res.dead = true

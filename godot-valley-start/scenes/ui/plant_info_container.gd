@@ -1,19 +1,22 @@
 extends Control
 
-var plant_info = preload("res://scenes/ui/plant_info.tscn")
+@onready var v_box_container: VBoxContainer = $MarginContainer/ScrollContainer/VBoxContainer
 
-var plants: Array[PlantResource]
+var plant_info = preload("res://scenes/ui/plant_info.tscn")
+var plants: Dictionary[PlantResource, PanelContainer]
 
 func add(res: PlantResource):
-	if plant_info == null:
-		print("plant info null")
-		return
 	var plant = plant_info.instantiate()
 	plant.setup(res)
-	$MarginContainer/ScrollContainer/VBoxContainer.add_child(plant)
-	plants.append(res)
-	update(res)
+	v_box_container.add_child(plant)
+	plants[res] = plant
+	update()
 	
-func update(res: PlantResource):
-	for plant in $MarginContainer/ScrollContainer/VBoxContainer.get_children():
+func update():
+	for plant in v_box_container.get_children():
 		plant.update()
+		
+func remove(res: PlantResource):
+	var plant = plants[res]
+	plants.erase(res)
+	plant.queue_free()
