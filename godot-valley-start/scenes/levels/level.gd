@@ -1,18 +1,24 @@
 extends Node2D
-@onready var soil: TileMapLayer = $"Tilemap Layers/Soil"
-@onready var water_patches: TileMapLayer = $"Tilemap Layers/Water Patches"
-@onready var grass: TileMapLayer = $"Tilemap Layers/Grass"
-@onready var water: TileMapLayer = $"Tilemap Layers/Water"
+@onready var soil: TileMapLayer = $"Layers/Soil"
+@onready var water_patches: TileMapLayer = $"Layers/Water Patches"
+@onready var grass: TileMapLayer = $"Layers/Grass"
+@onready var water: TileMapLayer = $"Layers/Water"
+@onready var debug: TileMapLayer = $"Layers/Debug"
 @onready var plant_scene = preload("res://scenes/objects/plant.tscn")
 @onready var objects: Node2D = $Objects
 @onready var player: CharacterBody2D = $Objects/Player
-@onready var debug: TileMapLayer = $"Tilemap Layers/Debug"
 @onready var day_timer: Timer = $Timers/DayTimer
 @onready var day_time_color: CanvasModulate = $Overlay/DayTimeColor
 @onready var day_transition_layer: ColorRect = $Overlay/CanvasLayer/DayTransitionLayer
 @onready var plant_info_container: Control = $Overlay/CanvasLayer/PlantInfoContainer
 
 @export var daytime_color: Gradient
+@export var rain_tint: Color
+var is_raining: bool:
+	set(value):
+		is_raining = value
+		$Layers/Splash.emitting = is_raining
+		$Layers/Raindrops.emitting = is_raining
 
 var used_cells: Array[Vector2i]
 var has_soil: bool = false
@@ -20,12 +26,21 @@ var grid_coord: Vector2i
 
 signal day_end()
 
+func _ready() -> void:
+	Data.forecast_rain = randf_range(0, 1) >= 0.75
+	is_raining = Data.forecast_rain
+	if is_raining: 
+		enable_all_water_patches()
+
 func _process(_delta: float) -> void:
 	var daytime_point = 1 - (day_timer.time_left / day_timer.wait_time)
-	var color = daytime_color.sample(daytime_point)
+	var color = daytime_color.sample(daytime_point) * get_weather_tint()
 	day_time_color.color = color
 	if Input.is_action_just_pressed("day_change"):
 		day_restart()
+		
+func get_weather_tint() -> Color:
+	return rain_tint if is_raining else Color(1,1,1)
 
 func day_restart():
 	var tween = create_tween()
@@ -105,6 +120,8 @@ func handle_hoe():
 	var cell = grass.get_cell_tile_data(grid_coord)
 	if cell and cell.get_custom_data('farmable'):
 		soil.set_cells_terrain_connect([grid_coord], 0, 0)
+		var random = randi_range(0, 2)
+		water_patches.set_cell(grid_coord, 0, Vector2(random, 0))
 	print(grid_coord)
 	
 func handle_water():
@@ -119,17 +136,22 @@ func handle_water():
 func _on_day_end() -> void:
 	for plant in get_tree().get_nodes_in_group('Plants'):
 		update_plant(plant)
-		if not plant.is_alive():
-			remove_plant(plant)
 	water_patches.clear()
+	is_raining = Data.forecast_rain
+	if is_raining: 
+		enable_all_water_patches()
+	Data.forecast_rain = randf_range(0, 1) >= 0.75
+	print("Tomorrow will rain: %s" % Data.forecast_rain)
+	
+func enable_all_water_patches():
+	for cell in soil.get_used_cells():
+		var random = randi_range(0, 2)
+		water_patches.set_cell(cell, 0, Vector2(random, 0))
 	
 func update_plant(plant: StaticBody2D):
 	var in_water_patches = plant.coord in water_patches.get_used_cells()
 	plant.grow(in_water_patches)
 	plant_info_container.update()
-	
-func remove_plant(plant: StaticBody2D):
-	used_cells.erase(plant.coord)
 	
 func plant_death(coord: Vector2i):
 	used_cells.erase(coord)

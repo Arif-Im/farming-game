@@ -55,7 +55,10 @@ func get_apple():
 		occupied_pos.erase(apple.position)
 		apple.queue_free()
 		print("get apple")
-		
+
+func _on_level_day_end() -> void:
+	handle_day_end()
+
 func handle_day_end():
 	if health <= 0:
 		var shape = CapsuleShape2D.new()
@@ -71,6 +74,3 @@ func handle_day_end():
 		else:
 			occupied_pos.clear()
 	health = 3
-
-func _on_level_day_end() -> void:
-	handle_day_end()

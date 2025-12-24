@@ -86,8 +86,6 @@ const TOOL_STATE_ANIMATIONS = {
 	Enum.Tool.FISH: 'Fish',
 	Enum.Tool.SEED: 'Seed',
 	}
-	
-
 const TOOL_TEXTURES = {
 	Enum.Tool.AXE: preload("res://graphics/icons/axe.png"),
 	Enum.Tool.HOE: preload("res://graphics/icons/hoe.png"),
@@ -95,9 +93,10 @@ const TOOL_TEXTURES = {
 	Enum.Tool.SWORD: preload("res://graphics/icons/sword.png"),
 	Enum.Tool.FISH: preload("res://graphics/icons/fish.png"),
 	Enum.Tool.SEED: preload("res://graphics/icons/wheat.png"),}
-	
 const SEED_TEXTURES = {
 	Enum.Seed.CORN: preload("res://graphics/icons/corn.png"),
 	Enum.Seed.PUMPKIN: preload("res://graphics/icons/pumpkin.png"),
 	Enum.Seed.TOMATO: preload("res://graphics/icons/tomato.png"),
 	Enum.Seed.WHEAT: preload("res://graphics/icons/wheat.png")}
+
+var forecast_rain: bool
