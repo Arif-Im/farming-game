@@ -1,0 +1,29 @@
+[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://cphyhhbs1xjcj"]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_wu2ua"]
+parameter_name = "Progress"
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float Progress;
+
+
+
+void vertex() {
+// FloatParameter:2
+	float n_out2p0 = Progress;
+
+
+// Output:0
+	COLOR.a = n_out2p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/vertex/2/node = SubResource("VisualShaderNodeFloatParameter_wu2ua")
+nodes/vertex/2/position = Vector2(-80, 360)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 3)

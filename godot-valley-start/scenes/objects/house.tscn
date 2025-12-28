@@ -1,10 +1,99 @@
-[gd_scene load_steps=2 format=4 uid="uid://ndbr0yyy5oqs"]
+[gd_scene load_steps=17 format=4 uid="uid://ndbr0yyy5oqs"]
 
 [ext_resource type="TileSet" uid="uid://cw45kfg2c8mfk" path="res://premade/HouseTileSet.tres" id="1_7nauk"]
+[ext_resource type="Script" uid="uid://c5axa5xk3omck" path="res://scenes/objects/house.gd" id="1_gbjef"]
+[ext_resource type="Texture2D" uid="uid://dpvg3yddudamn" path="res://graphics/tilesets/walls_floor_tile.png" id="2_toye6"]
+[ext_resource type="Texture2D" uid="uid://cwbhys0nypuq" path="res://graphics/tilesets/roof.png" id="4_2qw3j"]
+[ext_resource type="Shader" uid="uid://cphyhhbs1xjcj" path="res://scenes/objects/house.tres" id="4_mrani"]
+[ext_resource type="PackedScene" uid="uid://8sryekh2qhoi" path="res://scenes/objects/tv.tscn" id="6_mrani"]
+[ext_resource type="PackedScene" uid="uid://bkxgkcxe1ojw0" path="res://scenes/objects/bed.tscn" id="7_rxlqw"]
+[ext_resource type="PackedScene" uid="uid://c46h2c3da5whv" path="res://scenes/objects/house_plant.tscn" id="8_orvl7"]
+[ext_resource type="PackedScene" uid="uid://2i6bhtuknbxm" path="res://scenes/objects/carpet.tscn" id="9_miaso"]
+[ext_resource type="PackedScene" uid="uid://bd3ucbewo0cnh" path="res://scenes/objects/bookshelf.tscn" id="10_661mb"]
+[ext_resource type="PackedScene" uid="uid://b5xtrl5xoyvqs" path="res://scenes/objects/table.tscn" id="11_1446y"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mrani"]
+texture = ExtResource("2_toye6")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_rxlqw"]
+sources/0 = SubResource("TileSetAtlasSource_mrani")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rxlqw"]
+shader = ExtResource("4_mrani")
+shader_parameter/Progress = 1.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_orvl7"]
+texture = ExtResource("4_2qw3j")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_miaso"]
+sources/0 = SubResource("TileSetAtlasSource_orvl7")
 
 [node name="House" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_gbjef")
+
+[node name="FloorLayer" type="TileMapLayer" parent="."]
+z_index = -1
+tile_map_data = PackedByteArray("AAD8//7/AAAAAAAAAAD9//7/AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAABAP//AAAAAAAAAAAAAP//AAAAAAAAAAD/////AAAAAAAAAAD+////AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD8/wAAAAAAAAAAAAD8////AAAAAAAAAAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_rxlqw")
 
 [node name="WallsLayer" type="TileMapLayer" parent="."]
+y_sort_enabled = true
 position = Vector2(1, 0)
-tile_map_data = PackedByteArray("AAACAAEAAAABAAEAAAACAAAAAAABAAEAAAACAP//AAABAAEAAAACAP7/AAABAAAAAAABAAEAAAABAAEAAAABAAAAAAABAAEAAAABAP//AAABAAEAAAABAP7/AAABAAAAAAAAAAEAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAAAAP7/AAABAAAAAAD//wAAAAABAAEAAAD/////AAABAAEAAAD///7/AAABAAAAAAD+/wEAAAABAAEAAAD+/wAAAAABAAEAAAD+////AAABAAEAAAD+//7/AAABAAAAAAD9/wEAAAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9//7/AAABAAAAAAD8/wEAAAAAAAEAAAD8/wAAAAAAAAEAAAD8////AAAAAAEAAAD8//7/AAAAAAAAAAADAAIAAAACAAIAAAACAAIAAAABAAIAAAABAAIAAAABAAIAAAD+/wIAAAABAAIAAAD9/wIAAAABAAIAAAD8/wIAAAAAAAIAAAADAP7/AAACAAAAAAADAP//AAACAAEAAAADAAAAAAACAAEAAAADAAEAAAACAAEAAAD//wEAAAABAAEAAAAAAAIAAAAFAAEAAAD//wIAAAAGAAEAAAA=")
+tile_map_data = PackedByteArray("AAACAAEAAAACAAEAAAACAAAAAAACAAEAAAACAP//AAACAAEAAAACAP7/AAACAAAAAAABAAEAAAABAAEAAAABAAAAAAABAAEAAAABAP//AAABAAEAAAABAP7/AAABAAAAAAAAAAEAAAABAAEAAAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAAAAP7/AAABAAAAAAD//wAAAAABAAEAAAD/////AAABAAEAAAD///7/AAABAAAAAAD+/wEAAAABAAEAAAD+/wAAAAABAAEAAAD+////AAABAAEAAAD+//7/AAABAAAAAAD9/wEAAAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9//7/AAABAAAAAAD8/wEAAAAAAAEAAAD8/wAAAAAAAAEAAAD8////AAAAAAEAAAD8//7/AAAAAAAAAAACAAIAAAACAAIAAAABAAIAAAABAAIAAAD+/wIAAAABAAIAAAD9/wIAAAABAAIAAAD8/wIAAAAAAAIAAAD//wEAAAABAAEAAAAAAAIAAAABAAIAAAD//wIAAAAAAAQAAAA=")
 tile_set = ExtResource("1_7nauk")
+
+[node name="RoofLayer" type="TileMapLayer" parent="."]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_rxlqw")
+tile_map_data = PackedByteArray("AAD8//3/AAAAAAAAAAACAP3/AAACAAAAAAD9//3/AAABAAAAAAD+//3/AAABAAAAAAD///3/AAABAAAAAAAAAP3/AAABAAAAAAABAP3/AAABAAAAAAACAP7/AAACAAEAAAACAP//AAACAAIAAAD8//7/AAAAAAEAAAD8////AAAAAAIAAAD9//7/AAABAAEAAAD+//7/AAABAAEAAAD///7/AAABAAEAAAAAAP7/AAABAAEAAAABAP7/AAABAAEAAAABAP//AAABAAIAAAAAAP//AAABAAIAAAD/////AAABAAIAAAD+////AAABAAIAAAD9////AAABAAIAAAD9/wAAAAABAAMAAAD+/wAAAAABAAMAAAD//wAAAAABAAMAAAAAAAAAAAABAAMAAAABAAAAAAABAAMAAAACAAAAAAACAAMAAAD8/wAAAAAAAAMAAAD8/wEAAAAAAAMAAAD8/wIAAAAAAAUAAAD9/wEAAAABAAQAAAD+/wEAAAABAAQAAAD//wEAAAABAAQAAAAAAAEAAAABAAQAAAABAAEAAAABAAQAAAACAAEAAAACAAQAAAACAAIAAAACAAUAAAD9/wIAAAABAAUAAAD+/wIAAAABAAUAAAD//wIAAAABAAUAAAAAAAIAAAABAAUAAAABAAIAAAABAAUAAAA=")
+tile_set = SubResource("TileSet_miaso")
+
+[node name="HouseArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HouseArea"]
+visible = false
+polygon = PackedVector2Array(-60, 41, -60, -29, 46, -29, 46, 41, 1, 41, 1, 56, -15, 56, -15, 41)
+
+[node name="TV" parent="." instance=ExtResource("6_mrani")]
+position = Vector2(-38, -15)
+
+[node name="Bed" parent="." instance=ExtResource("7_rxlqw")]
+position = Vector2(37, -15)
+
+[node name="House Plant" parent="." instance=ExtResource("8_orvl7")]
+position = Vector2(-52, -19)
+
+[node name="Carpet" parent="." instance=ExtResource("9_miaso")]
+position = Vector2(2, 9)
+
+[node name="Bookshelf" parent="." instance=ExtResource("10_661mb")]
+position = Vector2(2, -22)
+
+[node name="Table" parent="." instance=ExtResource("11_1446y")]
+position = Vector2(2, 8)
+
+[connection signal="body_entered" from="HouseArea" to="." method="_on_house_area_body_entered"]
+[connection signal="body_exited" from="HouseArea" to="." method="_on_house_area_body_exited"]

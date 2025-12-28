@@ -19,7 +19,8 @@ height = 6.0
 radius = 12.0
 
 [node name="Plant" type="StaticBody2D" groups=["Plants"]]
-z_index = 1
+z_index = 4
+y_sort_enabled = true
 script = ExtResource("1_fvfks")
 
 [node name="FlashSprite2D" parent="." instance=ExtResource("3_0a33w")]

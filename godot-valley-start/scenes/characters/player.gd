@@ -14,6 +14,7 @@ var tool_use_offset: Vector2
 
 signal tool_use(tool: Enum.Tool, pos: Vector2)
 signal diagnose()
+signal day_change()
 
 func _physics_process(_delta: float) -> void:
 	if can_move:
@@ -23,6 +24,8 @@ func _physics_process(_delta: float) -> void:
 		
 	if direction:
 		last_direction = direction
+		var ray_y = direction.y if not direction.x else 0
+		$RayCast2D.target_position = Vector2(direction.x,ray_y).normalized() * 20
 	
 #region Interactions
 func get_basic_input():
@@ -50,8 +53,11 @@ func handle_seed_selection():
 		
 func handle_interactions():
 	if Input.is_action_just_pressed("action"):
-		tool_state_machine.travel(Data.TOOL_STATE_ANIMATIONS.get(current_tool))
-		update_animation("parameters/ToolOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		if not $RayCast2D.get_collider():
+			tool_state_machine.travel(Data.TOOL_STATE_ANIMATIONS.get(current_tool))
+			update_animation("parameters/ToolOneShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		else:
+			$RayCast2D.get_collider().interact(self)
 #endregion
 
 #region Movements

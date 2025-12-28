@@ -156,3 +156,6 @@ func update_plant(plant: StaticBody2D):
 func plant_death(coord: Vector2i):
 	used_cells.erase(coord)
 	print("Used cells: %s" % [used_cells])
+
+func _on_player_day_change() -> void:
+	day_restart()

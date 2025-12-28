@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://2i6bhtuknbxm"]
+
+[ext_resource type="Texture2D" uid="uid://dvaxmp1m08kte" path="res://graphics/objects/carpet.png" id="1_j3n5w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3n5w"]
+size = Vector2(32, 32)
+
+[node name="Carpet" type="StaticBody2D"]
+z_index = -1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_j3n5w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j3n5w")
+disabled = true

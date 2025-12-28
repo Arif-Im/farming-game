@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c46h2c3da5whv"]
+
+[ext_resource type="Texture2D" uid="uid://c6gdvovhpj0oj" path="res://graphics/objects/plant.png" id="1_rs8yk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2o70"]
+size = Vector2(6, 8)
+
+[node name="House Plant" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rs8yk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 4
+y_sort_enabled = true
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_t2o70")
