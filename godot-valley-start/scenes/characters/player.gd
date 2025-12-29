@@ -7,20 +7,26 @@ var current_tool: Enum.Tool = Enum.Tool.AXE
 var current_seed: Enum.Seed
 var can_move = true
 var tool_use_offset: Vector2
+var current_state: Enum.State
 
 @onready var move_state_machine: AnimationNodeStateMachinePlayback = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var tool_state_machine: AnimationNodeStateMachinePlayback = $Animation/AnimationTree.get("parameters/ToolStateMachine/playback")
 @onready var tool_ui: Control = $ToolUI
+@onready var fishing_game: Node2D = $FishingGame
 
 signal tool_use(tool: Enum.Tool, pos: Vector2)
 signal diagnose()
 signal day_change()
 
 func _physics_process(_delta: float) -> void:
-	if can_move:
-		get_basic_input()
-		move()
-		animate()
+	match current_state:
+		Enum.State.DEFAULT:
+			if can_move:
+				get_basic_input()
+				move()
+				animate()
+		Enum.State.FISHING:
+			get_fishing_input()
 		
 	if direction:
 		last_direction = direction
@@ -33,6 +39,22 @@ func get_basic_input():
 	handle_seed_selection()
 	handle_interactions()
 	handle_diagnose() 
+	
+func get_fishing_input():
+	if Input.is_action_just_pressed("action"):
+		print("do something")
+		
+	$FishingGame.hold(Input.is_action_pressed("action"))
+		
+func start_fishing():
+	fishing_game.reveal()
+	current_state = Enum.State.FISHING
+	update_animation("parameters/FishBlend2D/blend_amount", 1.0)
+	
+func stop_fishing():
+	can_move = true
+	current_state = Enum.State.DEFAULT
+	update_animation("parameters/FishBlend2D/blend_amount", 0.0)
 	
 func handle_diagnose():
 	if Input.is_action_just_pressed("diagnose"):
@@ -74,6 +96,7 @@ func animate():
 		var direction_animation = Vector2(round(direction.x), round(direction.y))
 		update_animation("parameters/MoveStateMachine/Idle/blend_position", direction_animation)
 		update_animation("parameters/MoveStateMachine/Walk/blend_position", direction_animation)
+		update_animation("parameters/FishBlendSpace2D/blend_position", direction_animation)
 		update_tool_animations(direction_animation)
 	else:
 		move_state_machine.travel("Idle")

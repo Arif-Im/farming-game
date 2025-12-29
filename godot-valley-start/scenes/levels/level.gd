@@ -115,6 +115,7 @@ func handle_fish():
 	statement = statement + "Fishable is %s\n" % [fishable]
 	statement = statement + "Grid coord is %s" % [grid_coord]
 	print(statement)
+	player.start_fishing()
 	
 func handle_hoe():
 	var cell = grass.get_cell_tile_data(grid_coord)
