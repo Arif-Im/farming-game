@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://dkaf0otbgtrp5"]
+[gd_scene load_steps=37 format=4 uid="uid://dkaf0otbgtrp5"]
 
 [ext_resource type="Script" uid="uid://8e4xx2ujtvll" path="res://scenes/levels/level.gd" id="1_d4w6o"]
 [ext_resource type="PackedScene" uid="uid://b0mnopqlx5dix" path="res://scenes/characters/player.tscn" id="2_b2cq8"]
@@ -15,6 +15,7 @@
 [ext_resource type="Shader" uid="uid://b752sedpoqe4y" path="res://shaders/circle_transition.gdshader" id="11_7pb6i"]
 [ext_resource type="PackedScene" uid="uid://d2jfcasv86i1m" path="res://scenes/ui/plant_info_container.tscn" id="12_xfk5q"]
 [ext_resource type="PackedScene" uid="uid://ndbr0yyy5oqs" path="res://scenes/objects/house.tscn" id="13_mq31s"]
+[ext_resource type="PackedScene" uid="uid://jagwlsp7f7ck" path="res://scenes/machines/sprinkler.tscn" id="14_5mi6g"]
 
 [sub_resource type="Gradient" id="Gradient_rmjfq"]
 offsets = PackedFloat32Array(0, 0.308204, 0.42793792, 0.9933481)
@@ -1220,7 +1221,6 @@ y_sort_enabled = true
 position = Vector2(161, 368)
 
 [node name="SimpleObject3" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(286, 257)
 size = 3
 style = 1
@@ -1234,6 +1234,7 @@ style = 1
 random = true
 
 [node name="SimpleObject5" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(194, 307)
 size = 2
 random = true
@@ -1244,6 +1245,7 @@ position = Vector2(101, 388)
 size = 2
 
 [node name="SimpleObject7" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(140, 368)
 size = 1
 random = true
@@ -1260,7 +1262,6 @@ position = Vector2(143, 383)
 style = 1
 
 [node name="SimpleObject10" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(262, 401)
 style = 1
 random = true
@@ -1289,7 +1290,6 @@ style = 1
 random = true
 
 [node name="SimpleObject15" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(-77, 310)
 style = 1
 random = true
@@ -1300,7 +1300,6 @@ style = 1
 random = true
 
 [node name="SimpleObject17" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(-40, 383)
 style = 1
 random = true
@@ -1322,12 +1321,12 @@ style = 1
 random = true
 
 [node name="SimpleObject21" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(189, 220)
 style = 1
 random = true
 
 [node name="SimpleObject22" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(187, 178)
 style = 1
 random = true
@@ -1351,6 +1350,7 @@ style = 1
 random = true
 
 [node name="SimpleObject26" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(350, 487)
 style = 1
 random = true
@@ -1361,18 +1361,17 @@ style = 1
 random = true
 
 [node name="SimpleObject28" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(372, 311)
 style = 1
 random = true
 
 [node name="SimpleObject29" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(412, 267)
 style = 1
 random = true
 
 [node name="SimpleObject30" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(35, 97)
 style = 1
 random = true
@@ -1388,6 +1387,7 @@ style = 1
 random = true
 
 [node name="SimpleObject33" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(199, 483)
 style = 1
 random = true
@@ -1445,6 +1445,9 @@ position = Vector2(-109, 374)
 
 [node name="House" parent="Objects" instance=ExtResource("13_mq31s")]
 position = Vector2(325, 87)
+
+[node name="Sprinkler" parent="Objects" instance=ExtResource("14_5mi6g")]
+position = Vector2(195, 250)
 
 [node name="Overlay" type="Node2D" parent="."]
 

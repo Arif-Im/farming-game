@@ -3,11 +3,12 @@ extends CharacterBody2D
 var direction: Vector2 
 var last_direction: Vector2 = Vector2(0,1)
 var speed:= 50
-var current_tool: Enum.Tool = Enum.Tool.AXE
-var current_seed: Enum.Seed
 var can_move = true
 var tool_use_offset: Vector2
+var current_tool: Enum.Tool = Enum.Tool.AXE
+var current_seed: Enum.Seed
 var current_state: Enum.State
+var current_style: Enum.Style
 
 @onready var move_state_machine: AnimationNodeStateMachinePlayback = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var tool_state_machine: AnimationNodeStateMachinePlayback = $Animation/AnimationTree.get("parameters/ToolStateMachine/playback")
@@ -38,13 +39,18 @@ func get_basic_input():
 	handle_tool_selection()
 	handle_seed_selection()
 	handle_interactions()
-	handle_diagnose() 
+	handle_diagnose()
+	handle_style_change()
+	
+func handle_style_change():
+	if Input.is_action_just_pressed("style_toggle"):
+		current_style = posmod(current_style + 1, Enum.Style.size() - 1) as Enum.Style
+		$Sprite2D.texture = Data.PLAYER_SKINS[current_style]
+		print(current_style)
 	
 func get_fishing_input():
-	if Input.is_action_just_pressed("action"):
-		print("do something")
-		
-	$FishingGame.hold(Input.is_action_pressed("action"))
+	var is_pressed = Input.is_action_pressed("action")
+	$FishingGame.hold(is_pressed)
 		
 func start_fishing():
 	fishing_game.reveal()
