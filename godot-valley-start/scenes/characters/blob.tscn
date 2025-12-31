@@ -621,7 +621,7 @@ nodes/AttackStateMachine/node = SubResource("AnimationNodeStateMachine_o4rk6")
 nodes/AttackStateMachine/position = Vector2(-180, 440)
 node_connections = [&"output", 0, &"DeathOneShot", &"DeathOneShot", 0, &"MoveStateMachine", &"DeathOneShot", 1, &"DeathStateMachine", &"OneShot 2", 1, &"AttackStateMachine"]
 
-[node name="Blob" type="CharacterBody2D" groups=["Objects"]]
+[node name="Blob" type="CharacterBody2D" groups=["Enemy", "Objects"]]
 z_index = 4
 y_sort_enabled = true
 collision_layer = 4
@@ -635,7 +635,7 @@ hframes = 14
 vframes = 4
 frame = 37
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy", "Objects"]]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_h5a76")
 

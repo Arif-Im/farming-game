@@ -58,10 +58,10 @@ func handle_normal_state(delta: float):
 	update_death_animation()
 #endregion
 
-func hit(tool: Enum.Tool):
+func hit(tool: Enum.Tool, hit_direction: Vector2):
 	if tool == Enum.Tool.SWORD:
 		stagger()
-		velocity = direction * -1 * knockback
+		velocity = hit_direction * -1 * knockback
 		flash_sprite_2d.flash()
 		health -= 1
 	

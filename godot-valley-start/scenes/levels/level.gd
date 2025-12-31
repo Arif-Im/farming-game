@@ -14,6 +14,7 @@ extends Node2D
 
 @export var daytime_color: Gradient
 @export var rain_tint: Color
+
 var is_raining: bool:
 	set(value):
 		is_raining = value
@@ -23,6 +24,11 @@ var is_raining: bool:
 var used_cells: Array[Vector2i]
 var has_soil: bool = false
 var grid_coord: Vector2i
+var machine_scenes = {
+	Enum.Machine.SPRINKLER: preload("res://scenes/machines/sprinkler.tscn"),
+	Enum.Machine.SCARECROW: preload("res://scenes/machines/scarecrow.tscn"),
+	Enum.Machine.FISHER: preload("res://scenes/machines/fisher.tscn")
+}
 
 signal day_end()
 
@@ -36,9 +42,9 @@ func _process(_delta: float) -> void:
 	var daytime_point = 1 - (day_timer.time_left / day_timer.wait_time)
 	var color = daytime_color.sample(daytime_point) * get_weather_tint()
 	day_time_color.color = color
-	if Input.is_action_just_pressed("day_change"):
-		day_restart()
-		
+	$Overlay/MachinePreviewSprite.visible = player.current_state == Enum.State.BUILDING
+	$Overlay/MachinePreviewSprite.position = player.get_machine_coord()
+
 func get_weather_tint() -> Color:
 	return rain_tint if is_raining else Color(1,1,1)
 
@@ -94,7 +100,8 @@ func set_grid_coord(pos: Vector2):
 func handle_damaging_tools(pos: Vector2, tool: Enum.Tool):
 	for object in get_tree().get_nodes_in_group('Objects'):
 		if object.position.distance_to(pos) < 20:
-			object.hit(tool)
+			var hit_direction = (player.position - object.position).normalized()
+			object.hit(tool, hit_direction)
 			
 func handle_seed():
 	if has_soil and grid_coord not in used_cells:
@@ -160,3 +167,13 @@ func plant_death(coord: Vector2i):
 
 func _on_player_day_change() -> void:
 	day_restart()
+
+
+func _on_player_build(current_machine: int) -> void:
+	if current_machine != Enum.Machine.DELETE:
+		var machine = machine_scenes[current_machine].instantiate()
+		machine.setup(player.get_machine_coord(), self, $Objects)
+
+
+func _on_player_machine_change(current_machine: int) -> void:
+	pass # Replace with function body.
