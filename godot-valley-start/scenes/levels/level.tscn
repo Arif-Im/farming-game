@@ -1227,14 +1227,12 @@ y_sort_enabled = true
 position = Vector2(161, 368)
 
 [node name="SimpleObject3" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(286, 257)
 size = 3
 style = 1
 random = true
 
 [node name="SimpleObject4" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(118, 258)
 size = 3
 style = 1
@@ -1258,6 +1256,7 @@ size = 1
 random = true
 
 [node name="SimpleObject8" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(161, 348)
 size = 1
 style = 1
@@ -1274,18 +1273,17 @@ style = 1
 random = true
 
 [node name="SimpleObject11" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(67, 469)
 style = 1
 random = true
 
 [node name="SimpleObject12" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(41, 484)
 style = 1
 random = true
 
 [node name="SimpleObject13" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(-52, 440)
 style = 1
 random = true
@@ -1302,17 +1300,18 @@ style = 1
 random = true
 
 [node name="SimpleObject16" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(-22, 306)
 style = 1
 random = true
 
 [node name="SimpleObject17" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(-40, 383)
 style = 1
 random = true
 
 [node name="SimpleObject18" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(-164, 348)
 style = 1
 random = true
@@ -1329,12 +1328,12 @@ style = 1
 random = true
 
 [node name="SimpleObject21" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(189, 220)
 style = 1
 random = true
 
 [node name="SimpleObject22" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(187, 178)
 style = 1
 random = true
@@ -1345,17 +1344,18 @@ style = 1
 random = true
 
 [node name="SimpleObject24" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(97, 210)
 style = 1
 random = true
 
 [node name="SimpleObject25" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(217, 93)
 style = 1
 random = true
 
 [node name="SimpleObject26" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(350, 487)
 style = 1
 random = true
@@ -1367,13 +1367,11 @@ style = 1
 random = true
 
 [node name="SimpleObject28" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(372, 311)
 style = 1
 random = true
 
 [node name="SimpleObject29" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(412, 267)
 style = 1
 random = true
@@ -1395,7 +1393,6 @@ style = 1
 random = true
 
 [node name="SimpleObject33" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(199, 483)
 style = 1
 random = true
@@ -1471,7 +1468,7 @@ color = Color(0.030401122, 0.09135371, 0.20292097, 1)
 
 [node name="PlantInfoContainer" parent="Overlay/CanvasLayer" instance=ExtResource("12_xfk5q")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Overlay"]
+[node name="MachinePreviewSprite" type="Sprite2D" parent="Overlay"]
 texture = ExtResource("17_jyre1")
 
 [node name="Timers" type="Node" parent="."]

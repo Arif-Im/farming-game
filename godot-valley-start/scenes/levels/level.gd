@@ -43,7 +43,7 @@ func _process(_delta: float) -> void:
 	var color = daytime_color.sample(daytime_point) * get_weather_tint()
 	day_time_color.color = color
 	$Overlay/MachinePreviewSprite.visible = player.current_state == Enum.State.BUILDING
-	$Overlay/MachinePreviewSprite.position = player.get_machine_coord()
+	$Overlay/MachinePreviewSprite.position = player.get_machine_coord() + Data.MACHINE_PREVIEW_TEXTURES[player.current_machine]['offset']
 
 func get_weather_tint() -> Color:
 	return rain_tint if is_raining else Color(1,1,1)
@@ -71,6 +71,7 @@ func debug_tile():
 	debug.set_cell(grid_coord, 1, Vector2i(1,3))
 #endregion
 
+#region Signal
 func _on_player_tool_use(tool: int, pos: Vector2) -> void:
 	set_grid_coord(pos)
 	has_soil = grid_coord in soil.get_used_cells()
@@ -89,12 +90,34 @@ func _on_player_tool_use(tool: int, pos: Vector2) -> void:
 func _on_player_diagnose() -> void:
 	plant_info_container.visible = not plant_info_container.visible
 
+func _on_day_end() -> void:
+	for plant in get_tree().get_nodes_in_group('Plants'):
+		update_plant(plant)
+	water_patches.clear()
+	is_raining = Data.forecast_rain
+	if is_raining: 
+		enable_all_water_patches()
+	Data.forecast_rain = randf_range(0, 1) >= 0.75
+	print("Tomorrow will rain: %s" % Data.forecast_rain)
+
+func _on_player_day_change() -> void:
+	day_restart()
+
+func _on_player_build(current_machine: int) -> void:
+	if current_machine != Enum.Machine.DELETE:
+		var machine = machine_scenes[current_machine].instantiate()
+		machine.setup(player.get_machine_coord(), self, $Objects)
+
+func _on_player_machine_change(current_machine: int) -> void:
+	$Overlay/MachinePreviewSprite.texture = Data.MACHINE_PREVIEW_TEXTURES[current_machine]['texture']
+
 func set_grid_coord(pos: Vector2):
 	var x = int(pos.x / Data.TILE_SIZE)
 	var y = int(pos.y / Data.TILE_SIZE)
 	grid_coord = Vector2i(x, y)
 	grid_coord.x += -1 if pos.x < 0 else 0
 	grid_coord.y += -1 if pos.y < 0 else 0
+#endregion
 
 #region Actions
 func handle_damaging_tools(pos: Vector2, tool: Enum.Tool):
@@ -140,16 +163,6 @@ func handle_water():
 		var random = randi_range(0, 2)
 		water_patches.set_cell(grid_coord, 0, Vector2(random, 0))
 #endregion
-
-func _on_day_end() -> void:
-	for plant in get_tree().get_nodes_in_group('Plants'):
-		update_plant(plant)
-	water_patches.clear()
-	is_raining = Data.forecast_rain
-	if is_raining: 
-		enable_all_water_patches()
-	Data.forecast_rain = randf_range(0, 1) >= 0.75
-	print("Tomorrow will rain: %s" % Data.forecast_rain)
 	
 func enable_all_water_patches():
 	for cell in soil.get_used_cells():
@@ -164,16 +177,3 @@ func update_plant(plant: StaticBody2D):
 func plant_death(coord: Vector2i):
 	used_cells.erase(coord)
 	print("Used cells: %s" % [used_cells])
-
-func _on_player_day_change() -> void:
-	day_restart()
-
-
-func _on_player_build(current_machine: int) -> void:
-	if current_machine != Enum.Machine.DELETE:
-		var machine = machine_scenes[current_machine].instantiate()
-		machine.setup(player.get_machine_coord(), self, $Objects)
-
-
-func _on_player_machine_change(current_machine: int) -> void:
-	pass # Replace with function body.

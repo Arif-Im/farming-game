@@ -98,5 +98,10 @@ const SEED_TEXTURES = {
 	Enum.Seed.PUMPKIN: preload("res://graphics/icons/pumpkin.png"),
 	Enum.Seed.TOMATO: preload("res://graphics/icons/tomato.png"),
 	Enum.Seed.WHEAT: preload("res://graphics/icons/wheat.png")}
+const MACHINE_PREVIEW_TEXTURES = {
+	Enum.Machine.SPRINKLER: {'texture':preload("res://graphics/icons/sprinkler.png"), 'offset': Vector2i(0,0)},
+	Enum.Machine.FISHER: {'texture':preload("res://graphics/icons/fisher.png"), 'offset': Vector2i(0,-4)},
+	Enum.Machine.SCARECROW: {'texture':preload("res://graphics/icons/scarecrow.png"), 'offset': Vector2i(0,-4)},
+	Enum.Machine.DELETE: {'texture':preload("res://graphics/icons/delete.png"), 'offset': Vector2i(0,0)}}
 
 var forecast_rain: bool
