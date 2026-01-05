@@ -2,7 +2,29 @@ extends Machine
 
 var is_fishing: bool
 
+var adjacent_positions: = {
+	Vector2i(0, 0): "down", 
+	Vector2i(0, 1): "down", 
+	Vector2i(1, 0): "right", 
+	Vector2i(0, -1): "up", 
+	Vector2i(-1, 0): "left", 
+}
+
+
+var adjacent_position: Vector2i
+var anim_name: String
+
 func _ready() -> void:
+	pass
+
+func setup(pos: Vector2i, level: Node2D, parent: Node2D):
+	super.setup(pos, level, parent)
+	for adjacent_pos in adjacent_positions.keys():
+		var possible_water_pos = adjacent_pos + coord
+		if possible_water_pos in level.water.get_used_cells() and possible_water_pos not in level.grass.get_used_cells():
+			adjacent_position = adjacent_pos
+			break
+	anim_name = adjacent_positions[adjacent_position]
 	start_fishing()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,9 +36,10 @@ func _process(delta: float) -> void:
 	$Control/TextureProgressBar.value = progress
 
 func start_fishing():
-	$AnimatedSprite2D.play("left")
+	print(anim_name)
+	$AnimatedSprite2D.play(anim_name)
 	await $AnimatedSprite2D.animation_finished
-	$AnimatedSprite2D.play("left_idle")
+	$AnimatedSprite2D.play(anim_name + "_idle")
 	$FishProgressTimer.start()
 	is_fishing = true
 

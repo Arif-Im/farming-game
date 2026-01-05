@@ -44,6 +44,7 @@ func _process(_delta: float) -> void:
 	day_time_color.color = color
 	$Overlay/MachinePreviewSprite.visible = player.current_state == Enum.State.BUILDING
 	$Overlay/MachinePreviewSprite.position = player.get_machine_coord() + Data.MACHINE_PREVIEW_TEXTURES[player.current_machine]['offset']
+	#debug_tile()
 
 func get_weather_tint() -> Color:
 	return rain_tint if is_raining else Color(1,1,1)
@@ -61,14 +62,16 @@ func level_reset():
 
 #region Debugging
 func debug_tile():
-	var player_position = player.position + player.last_direction * Data.TILE_SIZE + Vector2(0,4)
-	var x = int(player_position.x / Data.TILE_SIZE)
-	var y = int(player_position.y / Data.TILE_SIZE)
-	var grid_coord: Vector2i = Vector2i(x, y)
-	grid_coord.x += -1 if x < 0 else 0
-	grid_coord.y += -1 if y < 0 else 0
+	#var player_position = player.position + player.last_direction * Data.TILE_SIZE + Vector2(0,4)
+	#var x = int(player_position.x / Data.TILE_SIZE)
+	#var y = int(player_position.y / Data.TILE_SIZE)
+	#var grid_coord: Vector2i = Vector2i(x, y)
+	#grid_coord.x += -1 if x < 0 else 0
+	#grid_coord.y += -1 if y < 0 else 0
 	debug.clear()
-	debug.set_cell(grid_coord, 1, Vector2i(1,3))
+	for pos in grass.get_used_cells():
+		debug.set_cell(pos, 1, Vector2i(1,3))
+	debug.set_cell(player.get_machine_coord() / Data.TILE_SIZE, 1, Vector2i(1,3))
 #endregion
 
 #region Signal
@@ -104,7 +107,8 @@ func _on_player_day_change() -> void:
 	day_restart()
 
 func _on_player_build(current_machine: int) -> void:
-	if current_machine != Enum.Machine.DELETE:
+	var coord = player.get_machine_coord() / Data.TILE_SIZE
+	if current_machine != Enum.Machine.DELETE and coord in grass.get_used_cells():
 		var machine = machine_scenes[current_machine].instantiate()
 		machine.setup(player.get_machine_coord(), self, $Objects)
 
