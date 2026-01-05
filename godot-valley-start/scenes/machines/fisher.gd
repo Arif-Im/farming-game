@@ -21,7 +21,9 @@ func setup(pos: Vector2i, level: Node2D, parent: Node2D):
 	super.setup(pos, level, parent)
 	for adjacent_pos in adjacent_positions.keys():
 		var possible_water_pos = adjacent_pos + coord
-		if possible_water_pos in level.water.get_used_cells() and possible_water_pos not in level.grass.get_used_cells():
+		var in_water = possible_water_pos in level.water.get_used_cells()
+		var in_grass = possible_water_pos in level.grass.get_used_cells()
+		if in_water and not in_grass:
 			adjacent_position = adjacent_pos
 			break
 	anim_name = adjacent_positions[adjacent_position]
