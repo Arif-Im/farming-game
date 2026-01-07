@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var player: CharacterBody2D = get_tree().get_first_node_in_group('Player')
+#@onready var player: CharacterBody2D = get_tree().get_first_node_in_group('Player')
 @onready var animation_tree: AnimationTree = $Animation/AnimationTree
 @onready var move_state_machine: AnimationNodeStateMachinePlayback = $Animation/AnimationTree.get("parameters/MoveStateMachine/playback")
 @onready var death_state_machine: AnimationNodeStateMachinePlayback = $Animation/AnimationTree.get("parameters/DeathStateMachine/playback")
@@ -11,6 +11,7 @@ const EASE: float = .2;
 
 var speed: int = 1000
 var knockback: int = 2000
+var target: Node2D
 
 var direction: Vector2
 var direction_animation: Vector2
@@ -23,18 +24,23 @@ var health := 3:
 		health = value
 		if health <= 0:
 			handle_death_state()
-
-func _ready() -> void:
-	pass
+	
+func setup(target: Node2D, spawn_position: Vector2i):
+	self.target = target
+	position = spawn_position
 
 func _physics_process(delta: float) -> void:
-	direction = (player.position - position).normalized()
+	direction = (target.position - position).normalized()
 	set_direction_animation()
-	if is_stagger || is_dead:
-		velocity *= EASE
+	
+	if position.distance_to(target.position) < 10: 
+		health = 0
 	else:
-		handle_normal_state(delta)
-	move_and_slide()
+		if is_stagger || is_dead:
+			velocity *= EASE
+		else:
+			handle_normal_state(delta)
+		move_and_slide()
 
 #region State
 func handle_death_state():
@@ -44,15 +50,20 @@ func handle_death_state():
 	queue_free()
 
 func handle_normal_state(delta: float):
-	if position.distance_to(player.position) < 75:
-		if is_moving:
-			velocity = direction * speed * delta
-		else:
-			velocity = Vector2.ZERO
-		move_state_machine.travel("Move")
+	#if position.distance_to(target.position) < 75:
+		#if is_moving:
+			#velocity = direction * speed * delta
+		#else:
+			#velocity = Vector2.ZERO
+		#move_state_machine.travel("Move")
+	#else:
+		#velocity = Vector2.ZERO
+		#move_state_machine.travel("Idle")
+	if is_moving:
+		velocity = direction * speed * delta
 	else:
 		velocity = Vector2.ZERO
-		move_state_machine.travel("Idle")
+	move_state_machine.travel("Move")
 	update_move_animation()
 	update_idle_animation()
 	update_death_animation()

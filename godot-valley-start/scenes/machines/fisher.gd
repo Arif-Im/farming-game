@@ -10,7 +10,6 @@ var adjacent_positions: = {
 	Vector2i(-1, 0): "left", 
 }
 
-
 var adjacent_position: Vector2i
 var anim_name: String
 
@@ -18,13 +17,18 @@ func _ready() -> void:
 	pass
 
 func setup(pos: Vector2i, level: Node2D, parent: Node2D):
-	super.setup(pos, level, parent)
+	# Fix this part
+	coord = pos / Data.TILE_SIZE
+	coord.x += -1 if pos.x < 0 else 0
+	coord.y += -1 if pos.y < 0 else 0
 	for adjacent_pos in adjacent_positions.keys():
 		var possible_water_pos = adjacent_pos + coord
-		var in_water = possible_water_pos in level.water.get_used_cells()
-		var in_grass = possible_water_pos in level.grass.get_used_cells()
-		if in_water and not in_grass:
+		var in_grass = coord in level.grass.get_used_cells()
+		var adjacent_in_water = possible_water_pos in level.water.get_used_cells()
+		var adjacent_in_grass = possible_water_pos in level.grass.get_used_cells()
+		if adjacent_in_water and not adjacent_in_grass and in_grass:
 			adjacent_position = adjacent_pos
+			super.setup(pos, level, parent)
 			break
 	anim_name = adjacent_positions[adjacent_position]
 	start_fishing()

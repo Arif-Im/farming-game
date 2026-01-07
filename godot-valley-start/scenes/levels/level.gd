@@ -11,6 +11,7 @@ extends Node2D
 @onready var day_time_color: CanvasModulate = $Overlay/DayTimeColor
 @onready var day_transition_layer: ColorRect = $Overlay/CanvasLayer/DayTransitionLayer
 @onready var plant_info_container: Control = $Overlay/CanvasLayer/PlantInfoContainer
+@onready var blob_scene = preload("res://scenes/characters/blob.tscn")
 
 @export var daytime_color: Gradient
 @export var rain_tint: Color
@@ -96,6 +97,12 @@ func _on_player_diagnose() -> void:
 func _on_day_end() -> void:
 	for plant in get_tree().get_nodes_in_group('Plants'):
 		update_plant(plant)
+		var blob = blob_scene.instantiate()
+		var spawn_position = grass.get_used_cells().pick_random() * Data.TILE_SIZE
+		print("spawn_position: %s" % spawn_position)
+		print("player_position: %s" % player.position)
+		blob.setup(plant, spawn_position)
+		add_child(blob)
 	water_patches.clear()
 	is_raining = Data.forecast_rain
 	if is_raining: 
