@@ -97,12 +97,6 @@ func _on_player_diagnose() -> void:
 func _on_day_end() -> void:
 	for plant in get_tree().get_nodes_in_group('Plants'):
 		update_plant(plant)
-		var blob = blob_scene.instantiate()
-		var spawn_position = grass.get_used_cells().pick_random() * Data.TILE_SIZE
-		print("spawn_position: %s" % spawn_position)
-		print("player_position: %s" % player.position)
-		blob.setup(plant, spawn_position)
-		add_child(blob)
 	water_patches.clear()
 	is_raining = Data.forecast_rain
 	if is_raining: 
@@ -188,3 +182,14 @@ func update_plant(plant: StaticBody2D):
 func plant_death(coord: Vector2i):
 	used_cells.erase(coord)
 	print("Used cells: %s" % [used_cells])
+
+
+func _on_blob_timer_timeout() -> void:
+	var plants = get_tree().get_nodes_in_group('Plants')
+	if plants.size() > 0:
+		var blob = blob_scene.instantiate()
+		var spawn_position = grass.get_used_cells().pick_random() * Data.TILE_SIZE
+		print("spawn_position: %s" % spawn_position)
+		print("player_position: %s" % player.position)
+		blob.setup(plants.pick_random(), spawn_position)
+		add_child(blob)

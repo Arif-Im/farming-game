@@ -14,11 +14,13 @@ var knockback: int = 2000
 var target: Node2D
 
 var direction: Vector2
+var last_direction: Vector2 = Vector2.ZERO
 var direction_animation: Vector2
 var last_direction_animation: Vector2 = Vector2.ZERO
 var is_dead: bool = false
 var is_moving: bool = false
 var is_stagger: bool = false
+var active = true
 var health := 3:
 	set(value):
 		health = value
@@ -30,17 +32,22 @@ func setup(target: Node2D, spawn_position: Vector2i):
 	position = spawn_position
 
 func _physics_process(delta: float) -> void:
-	direction = (target.position - position).normalized()
+	direction = (target.position - position).normalized() if target != null else last_direction
+	last_direction = direction
+		
 	set_direction_animation()
-	
-	if position.distance_to(target.position) < 10: 
-		health = 0
+		
+	if is_stagger || is_dead:
+		velocity *= EASE
 	else:
-		if is_stagger || is_dead:
-			velocity *= EASE
+		if target == null:
+			health = 0
+		elif position.distance_to(target.position) < 10: 
+			health = 0
+			target.handle_damage()
 		else:
 			handle_normal_state(delta)
-		move_and_slide()
+	move_and_slide()
 
 #region State
 func handle_death_state():

@@ -1250,6 +1250,7 @@ size = 1
 random = true
 
 [node name="SimpleObject8" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(161, 348)
 size = 1
 style = 1
@@ -1272,13 +1273,11 @@ style = 1
 random = true
 
 [node name="SimpleObject12" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(41, 484)
 style = 1
 random = true
 
 [node name="SimpleObject13" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(-52, 440)
 style = 1
 random = true
@@ -1289,6 +1288,7 @@ style = 1
 random = true
 
 [node name="SimpleObject15" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(-77, 310)
 style = 1
 random = true
@@ -1305,18 +1305,17 @@ style = 1
 random = true
 
 [node name="SimpleObject18" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(-164, 348)
 style = 1
 random = true
 
 [node name="SimpleObject19" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(138, 201)
 style = 1
 random = true
 
 [node name="SimpleObject20" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(278, 202)
 style = 1
 random = true
@@ -1334,7 +1333,6 @@ style = 1
 random = true
 
 [node name="SimpleObject23" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(57, 184)
 style = 1
 random = true
@@ -1357,17 +1355,18 @@ style = 1
 random = true
 
 [node name="SimpleObject27" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
-z_index = 4
 position = Vector2(417, 504)
 style = 1
 random = true
 
 [node name="SimpleObject28" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(372, 311)
 style = 1
 random = true
 
 [node name="SimpleObject29" parent="Objects/Foliage" instance=ExtResource("10_rmjfq")]
+z_index = 4
 position = Vector2(412, 267)
 style = 1
 random = true
@@ -1475,6 +1474,9 @@ wait_time = 5.0
 one_shot = true
 autostart = true
 
+[node name="BlobTimer" type="Timer" parent="Timers"]
+autostart = true
+
 [node name="Fisher" parent="." instance=ExtResource("16_5mi6g")]
 position = Vector2(351, 173)
 
@@ -1488,3 +1490,4 @@ position = Vector2(381, 156)
 [connection signal="diagnose" from="Objects/Player" to="." method="_on_player_diagnose"]
 [connection signal="machine_change" from="Objects/Player" to="." method="_on_player_machine_change"]
 [connection signal="tool_use" from="Objects/Player" to="." method="_on_player_tool_use"]
+[connection signal="timeout" from="Timers/BlobTimer" to="." method="_on_blob_timer_timeout"]

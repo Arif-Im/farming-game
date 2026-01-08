@@ -18,12 +18,15 @@ func grow(watered: bool):
 	if watered:
 		res.grow($FlashSprite2D)
 	else:
-		res.wither()
-		if not is_alive():
-			handle_death()
-			queue_free()
-			
-		
+		handle_damage()
+
+func handle_damage():
+	print("damage")
+	res.wither()
+	if not is_alive():
+		handle_death()
+		queue_free()
+
 func is_alive():
 	return res.life > 0
 	

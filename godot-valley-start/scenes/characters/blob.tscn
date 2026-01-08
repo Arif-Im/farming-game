@@ -607,7 +607,7 @@ graph_offset = Vector2(-556, -162)
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ovk1j"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7rtlp"]
-graph_offset = Vector2(-819.95276, 31.41896)
+graph_offset = Vector2(-536.82117, 36.82344)
 nodes/output/position = Vector2(200, 100)
 nodes/MoveStateMachine/node = SubResource("AnimationNodeStateMachine_h5a76")
 nodes/MoveStateMachine/position = Vector2(-560, 140)
